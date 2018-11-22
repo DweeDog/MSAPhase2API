@@ -30,7 +30,7 @@ namespace ContactBookAPI
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddDbContext<ContactBookAPIContext>(options =>
-                     options.UseSqlite(Configuration.GetConnectionString("ContactBookContext")));
+                     options.UseSqlite(Configuration.GetConnectionString("ContactBookAPIContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
