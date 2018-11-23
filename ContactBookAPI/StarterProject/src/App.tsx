@@ -5,7 +5,6 @@ import MemeDetail from './components/MemeDetail';
 import NavBar from './components/NavBar';
 import MemeList from './components/MemeList';
 import PatrickLogo from './patrick-logo.png';
-import * as Webcam from "react-webcam";
 
 
 interface IState {
@@ -13,9 +12,6 @@ interface IState {
 	contacts: any[],
 	open: boolean,
 	uploadFileList: any,
-	authenticated: boolean,
-	refCamera: any
-	predictionResult: any
 	
 }
 
@@ -27,9 +23,6 @@ class App extends React.Component<{}, IState> {
 			contacts: [],
 			open: false,
 			uploadFileList: null,
-			authenticated: false,
-			refCamera: React.createRef(),
-			predictionResult: []
 		}     	
 		this.selectNewMeme = this.selectNewMeme.bind(this)
 		this.fetchImages = this.fetchImages.bind(this)
@@ -37,29 +30,15 @@ class App extends React.Component<{}, IState> {
 
 		this.handleFileUpload = this.handleFileUpload.bind(this)
 		this.uploadContact = this.uploadContact.bind(this)
-		this.authenticate = this.authenticate.bind(this)
 	}
 
 	public render() {
 		const { open } = this.state;
-		const { authenticated } = this.state;
 		return (
 		<div>
-			
-		{(!authenticated) ?
-			<Modal open={!authenticated} onClose={this.authenticate} closeOnOverlayClick={false} showCloseIcon={false} center={true}>
-				<Webcam
-					audio={false}
-					screenshotFormat="image/jpeg"
-					ref={this.state.refCamera}
-				/>
-				<div className="row nav-row">
-					<div className="btn btn-primary bottom-button" onClick={this.authenticate}>Login</div>
-				</div>
-			</Modal> : ""}
 
 
-			{(authenticated) ?
+
 			<div>
 			<NavBar />
 			<div className="header-wrapper">
@@ -100,8 +79,7 @@ class App extends React.Component<{}, IState> {
 			</Modal>
 
 		</div>
-		: ""}
-	</div>
+		</div>
 		);
 		
 	}
@@ -183,46 +161,7 @@ class App extends React.Component<{}, IState> {
 		})
 	}
 
-		// Authenticate
-	private authenticate() {
-		const screenshot = this.state.refCamera.current.getScreenshot();
-		this.getFaceRecognitionResult(screenshot);
-	}
-
-	// Call custom vision model
-	private getFaceRecognitionResult(image: string) {
-		const url = "https://southcentralus.api.cognitive.microsoft.com/customvision/v2.0/Prediction/67f3fa97-c013-4b0a-a012-b4a897c595c9/url?iterationId=93ae0b8d-784c-4ffe-bbed-399e15976c19"
-		if (image === null) {
-			return;
-		}
-		const base64 = require('base64-js');
-		const base64content = image.split(";")[1].split(",")[1]
-		const byteArray = base64.toByteArray(base64content);
-		fetch(url, {
-			body: byteArray,
-			headers: {
-				'cache-control': 'no-cache', 'Prediction-Key': '5696d3cc5ca3484d89b16a8cadd93652', 'Content-Type': 'application/octet-stream'
-			},
-			method: 'POST'
-		})
-			.then((response: any) => {
-				if (!response.ok) {
-					// Error State
-					alert(response.statusText)
-				} else {
-					response.json().then((json: any) => {
-						console.log(json.predictions[0])
-						this.setState({predictionResult: json.predictions[0] })
-						if (this.state.predictionResult.probability > 0.7) {
-							this.setState({authenticated: true})
-						} else {
-							this.setState({authenticated: false})
-							
-						}
-					})
-				}
-			})
-	}
+	
 
 	
 }
