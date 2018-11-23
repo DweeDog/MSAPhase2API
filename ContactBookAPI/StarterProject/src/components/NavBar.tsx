@@ -7,7 +7,7 @@ import * as React from 'react';
 // import { IndexLinkContainer } from "react-router-bootstrap";
 
 
-export const Header: React.StatelessComponent<{}> = () => {    
+export const Header: React.StatelessComponent<{}> = () => {
 
     return (
             <AppBar position="static">

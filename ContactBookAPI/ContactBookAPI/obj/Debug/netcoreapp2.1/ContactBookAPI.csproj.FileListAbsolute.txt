@@ -2,6 +2,7 @@ C:\Users\dweep\Documents\GitHub\MSAPhase2API\ContactBookAPI\ContactBookAPI\bin\D
 C:\Users\dweep\Documents\GitHub\MSAPhase2API\ContactBookAPI\ContactBookAPI\bin\Debug\netcoreapp2.1\ContactBookAPI.runtimeconfig.json
 C:\Users\dweep\Documents\GitHub\MSAPhase2API\ContactBookAPI\ContactBookAPI\bin\Debug\netcoreapp2.1\ContactBookAPI.runtimeconfig.dev.json
 C:\Users\dweep\Documents\GitHub\MSAPhase2API\ContactBookAPI\ContactBookAPI\bin\Debug\netcoreapp2.1\ContactBookAPI.dll
+C:\Users\dweep\Documents\GitHub\MSAPhase2API\ContactBookAPI\ContactBookAPI\bin\Debug\netcoreapp2.1\ContactBookAPI.pdb
 C:\Users\dweep\Documents\GitHub\MSAPhase2API\ContactBookAPI\ContactBookAPI\obj\Debug\netcoreapp2.1\ContactBookAPI.csprojAssemblyReference.cache
 C:\Users\dweep\Documents\GitHub\MSAPhase2API\ContactBookAPI\ContactBookAPI\obj\Debug\netcoreapp2.1\ContactBookAPI.csproj.CoreCompileInputs.cache
 C:\Users\dweep\Documents\GitHub\MSAPhase2API\ContactBookAPI\ContactBookAPI\obj\Debug\netcoreapp2.1\ContactBookAPI.RazorAssemblyInfo.cache
@@ -9,6 +10,5 @@ C:\Users\dweep\Documents\GitHub\MSAPhase2API\ContactBookAPI\ContactBookAPI\obj\D
 C:\Users\dweep\Documents\GitHub\MSAPhase2API\ContactBookAPI\ContactBookAPI\obj\Debug\netcoreapp2.1\ContactBookAPI.AssemblyInfoInputs.cache
 C:\Users\dweep\Documents\GitHub\MSAPhase2API\ContactBookAPI\ContactBookAPI\obj\Debug\netcoreapp2.1\ContactBookAPI.AssemblyInfo.cs
 C:\Users\dweep\Documents\GitHub\MSAPhase2API\ContactBookAPI\ContactBookAPI\obj\Debug\netcoreapp2.1\ContactBookAPI.RazorTargetAssemblyInfo.cache
-C:\Users\dweep\Documents\GitHub\MSAPhase2API\ContactBookAPI\ContactBookAPI\bin\Debug\netcoreapp2.1\ContactBookAPI.pdb
 C:\Users\dweep\Documents\GitHub\MSAPhase2API\ContactBookAPI\ContactBookAPI\obj\Debug\netcoreapp2.1\ContactBookAPI.dll
 C:\Users\dweep\Documents\GitHub\MSAPhase2API\ContactBookAPI\ContactBookAPI\obj\Debug\netcoreapp2.1\ContactBookAPI.pdb

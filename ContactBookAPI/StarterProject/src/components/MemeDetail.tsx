@@ -17,6 +17,8 @@ export default class MemeDetail extends React.Component<IProps, IState> {
             open: false
         }
 
+        this.updateContact = this.updateContact.bind(this)
+
     }
 
 	public render() {
@@ -25,7 +27,7 @@ export default class MemeDetail extends React.Component<IProps, IState> {
 		return (
 			<div className="container meme-wrapper">
                 <div className="row meme-heading">
-                    <b>{currentMeme.title}</b>&nbsp; ({currentMeme.tags})
+                    <b>{currentMeme.title}</b>&nbsp; ({currentMeme.tags}) 
                 </div>
                 <div className="row meme-date">
                     {currentMeme.uploaded}
@@ -33,25 +35,33 @@ export default class MemeDetail extends React.Component<IProps, IState> {
                 <div className="row meme-img">
                     <img src={currentMeme.url}/>
                 </div>
+
+                <div className="row meme-description">
+                    {currentMeme.description}
+                </div>
+
+                <div className="row Contact-MobilePhone">
+                    {currentMeme.mobilephone}
+                </div>
                 
                 <div className="row meme-done-button">
                     <div className="btn btn-primary btn-action" onClick={this.downloadMeme.bind(this, currentMeme.url)}>Download </div>
                     <div className="btn btn-primary btn-action" onClick={this.onOpenModal}>Edit </div>
-                    <div className="btn btn-primary btn-action" onClick={this.methodNotImplemented.bind(this, currentMeme.id)}>Delete </div>
+                    <div className="btn btn-primary btn-action" onClick={this.deleteContact.bind(this, currentMeme.id)}>Delete </div>
                 </div>
                 <Modal open={open} onClose={this.onCloseModal}>
                     <form>
                         <div className="form-group">
-                            <label>Meme Title</label>
+                            <label>Contact Title</label>
                             <input type="text" className="form-control" id="meme-edit-title-input" placeholder="Enter Title"/>
-                            <small className="form-text text-muted">You can edit any meme later</small>
+                            <small className="form-text text-muted">You can edit any Contact later</small>
                         </div>
                         <div className="form-group">
                             <label>Tag</label>
                             <input type="text" className="form-control" id="meme-edit-tag-input" placeholder="Enter Tag"/>
                             <small className="form-text text-muted">Tag is used for search</small>
                         </div>
-                        <button type="button" className="btn" onClick={this.methodNotImplemented}>Save</button>
+                        <button type="button" className="btn" onClick={this.updateContact}>Save</button>
                     </form>
                 </Modal>
             </div>
@@ -67,13 +77,63 @@ export default class MemeDetail extends React.Component<IProps, IState> {
     private onCloseModal = () => {
 		this.setState({ open: false });
     };
-    
-    private methodNotImplemented() {
-		alert("Method not implemented")
-	}
 
     // Open meme image in new tab
     private downloadMeme(url: any) {
         window.open(url);
+    }
+
+    private updateContact(){
+        const titleInput = document.getElementById("meme-edit-title-input") as HTMLInputElement
+        const tagInput = document.getElementById("meme-edit-tag-input") as HTMLInputElement
+    
+        if (titleInput === null || tagInput === null) {
+            return;
+        }
+    
+        const currentMeme = this.props.currentMeme
+        const url = "https://msaphase2contactapi.azurewebsites.net/api/ContactItems/" + currentMeme.id
+        const updatedTitle = titleInput.value
+        const updatedTag = tagInput.value
+        fetch(url, {
+            body: JSON.stringify({
+                "height": currentMeme.height,
+                "id": currentMeme.id,
+                "tags": updatedTag,
+                "title": updatedTitle,
+                "description":currentMeme.description,
+                "uploaded": currentMeme.uploaded,
+                "url": currentMeme.url,
+                "width": currentMeme.width,
+                "mobilephone": currentMeme.mobilephone
+            }),
+            headers: {'cache-control': 'no-cache','Content-Type': 'application/json'},
+            method: 'PUT'
+        })
+        .then((response : any) => {
+            if (!response.ok) {
+                // Error State
+                alert(response.statusText + " " + url)
+            } else {
+                location.reload()
+            }
+        })
+    }
+
+    private deleteContact(id: any) {
+        const url = "https://msaphase2contactapi.azurewebsites.net/api/ContactItems/" + id
+    
+        fetch(url, {
+            method: 'DELETE'
+        })
+        .then((response : any) => {
+            if (!response.ok) {
+                // Error Response
+                alert(response.statusText)
+            }
+            else {
+                location.reload()
+            }
+        })
     }
 }
