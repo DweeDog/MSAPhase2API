@@ -2,6 +2,7 @@ import * as React from 'react';
 import Modal from 'react-responsive-modal';
 import './App.css';
 import MemeDetail from './components/MemeDetail';
+import NavBar from './components/NavBar';
 import MemeList from './components/MemeList';
 import PatrickLogo from './patrick-logo.png';
 
@@ -29,6 +30,7 @@ class App extends React.Component<{}, IState> {
 		const { open } = this.state;
 		return (
 		<div>
+			<NavBar />
 			<div className="header-wrapper">
 				<div className="container header">
 					<img src={PatrickLogo} height='40'/>&nbsp; My ContactBook &nbsp;
